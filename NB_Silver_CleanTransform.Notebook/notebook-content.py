@@ -108,23 +108,25 @@ display(df_epi)
 
 from pyspark.sql.functions import col, when
 
-df_epi = df_epi.withColumn(
-    "has_negative_value",
-    when(
-        (col("new_confirmed") < 0) | (col("new_deceased") < 0) |
-        (col("new_recovered") < 0) | (col("new_tested") < 0),
-        True
-    ).otherwise(False)
-)
+MIN_VALID_DATE = to_date(lit("2019-01-01"))
+MAX_VALID_DATE = current_date()
 
 df_epi = df_epi.withColumn(
-    "has_missing_value",
-    when(
-        col("new_confirmed").isNull() | col("new_deceased").isNull() |
-        col("new_recovered").isNull() | col("new_tested").isNull(),
-        True
-    ).otherwise(False)
+    "has_invalid_date",
+    when(col("date").isNull() | (col("date") < MIN_VALID_DATE) | (col("date") > MAX_VALID_DATE), True).otherwise(False)
 )
+df_epi = df_epi.withColumn("date", when(col("has_invalid_date") == True, None).otherwise(col("date")))
+
+df_epi = df_epi.withColumn(
+    "has_negative_value",
+    when((col("new_confirmed") < 0) | (col("new_deceased") < 0), True).otherwise(False)
+)
+df_epi = df_epi.withColumn(
+    "has_missing_value",
+    when(col("new_confirmed").isNull() | col("new_deceased").isNull(), True).otherwise(False)
+)
+
+df_epi = df_epi.dropDuplicates(["location_key", "date"])
 
 display(df_epi)
 
@@ -162,8 +164,8 @@ display(df_epi_quarantine)
 # CELL ********************
 
 # Write both
-df_epi_clean.write.format("delta").mode("overwrite").saveAsTable("silver.epidemiology")
-df_epi_quarantine.write.format("delta").mode("overwrite").saveAsTable("silver.epidemiology_quarantine")
+df_epi_clean.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("silver.epidemiology")
+df_epi_quarantine.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("silver.epidemiology_quarantine")
 
 print(f"silver.epidemiology (clean): {df_epi_clean.count()} rows")
 print(f"silver.epidemiology_quarantine (flagged): {df_epi_quarantine.count()} rows")
@@ -240,40 +242,20 @@ MAX_VALID_DATE = current_date()
 
 df_hosp = df_hosp.withColumn(
     "has_invalid_date",
-    when(
-        col("date").isNull() | (col("date") < MIN_VALID_DATE) | (col("date") > MAX_VALID_DATE),
-        True
-    ).otherwise(False)
+    when(col("date").isNull() | (col("date") < MIN_VALID_DATE) | (col("date") > MAX_VALID_DATE), True).otherwise(False)
 )
-
-df_hosp = df_hosp.withColumn(
-    "date",
-    when(col("has_invalid_date") == True, None).otherwise(col("date"))
-)
+df_hosp = df_hosp.withColumn("date", when(col("has_invalid_date") == True, None).otherwise(col("date")))
 
 df_hosp = df_hosp.withColumn(
     "has_negative_value",
-    when(
-        (col("new_hospitalized_patients") < 0) | (col("current_hospitalized_patients") < 0) |
-        (col("new_intensive_care_patients") < 0) | (col("current_intensive_care_patients") < 0) |
-        (col("new_ventilator_patients") < 0) | (col("current_ventilator_patients") < 0),
-        True
-    ).otherwise(False)
+    when((col("new_hospitalized_patients") < 0) | (col("current_hospitalized_patients") < 0), True).otherwise(False)
 )
-
 df_hosp = df_hosp.withColumn(
     "has_missing_value",
-    when(
-        col("new_hospitalized_patients").isNull() | col("current_hospitalized_patients").isNull() |
-        col("new_intensive_care_patients").isNull() | col("current_intensive_care_patients").isNull() |
-        col("new_ventilator_patients").isNull() | col("current_ventilator_patients").isNull(),
-        True
-    ).otherwise(False)
+    when(col("new_hospitalized_patients").isNull() | col("current_hospitalized_patients").isNull(), True).otherwise(False)
 )
 
 df_hosp = df_hosp.dropDuplicates(["location_key", "date"])
-
-display(df_hosp)
 
 # METADATA ********************
 
@@ -368,42 +350,25 @@ display(df_vax)
 
 # CELL ********************
 
-MIN_VALID_DATE = to_date(lit('2019-01-01'))
-MAX_VALID_DATE = current_timestamp()
-
-df_vax = df_vax.withColumn('has_invalid_date',
-                            when(
-                                col('date').isNull() | (col('date') < MIN_VALID_DATE) | (col('date') > MAX_VALID_DATE),
-                                True
-                            ).otherwise(False)
-                            )
+MIN_VALID_DATE = to_date(lit("2019-01-01"))
+MAX_VALID_DATE = current_date()
 
 df_vax = df_vax.withColumn(
-    "date",
-    when(col("has_invalid_date") == True, None).otherwise(col("date"))
+    "has_invalid_date",
+    when(col("date").isNull() | (col("date") < MIN_VALID_DATE) | (col("date") > MAX_VALID_DATE), True).otherwise(False)
 )
+df_vax = df_vax.withColumn("date", when(col("has_invalid_date") == True, None).otherwise(col("date")))
 
 df_vax = df_vax.withColumn(
     "has_negative_value",
-    when(
-        (col("new_persons_vaccinated") < 0) | (col("new_persons_fully_vaccinated") < 0) |
-        (col("new_vaccine_doses_administered") < 0),
-        True
-    ).otherwise(False)
+    when(col("new_persons_vaccinated") < 0, True).otherwise(False)
 )
-
 df_vax = df_vax.withColumn(
     "has_missing_value",
-    when(
-        col("new_persons_vaccinated").isNull() | col("new_persons_fully_vaccinated").isNull() |
-        col("new_vaccine_doses_administered").isNull(),
-        True
-    ).otherwise(False)
+    when(col("new_persons_vaccinated").isNull(), True).otherwise(False)
 )
 
 df_vax = df_vax.dropDuplicates(["location_key", "date"])
-
-display(df_vax)
 
 # METADATA ********************
 
