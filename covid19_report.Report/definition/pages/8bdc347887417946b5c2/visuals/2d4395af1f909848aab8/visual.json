@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "052a0d1381ebdfd27181",
+  "name": "2d4395af1f909848aab8",
   "position": {
-    "x": 0,
+    "x": 649.922480620155,
     "y": 286.75968992248062,
-    "z": 0,
+    "z": 7000,
     "height": 433.61240310077517,
-    "width": 649.922480620155,
-    "tabOrder": 0
+    "width": 630.077519379845,
+    "tabOrder": 7000
   },
   "visual": {
-    "visualType": "lineChart",
+    "visualType": "clusteredBarChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dimdate"
+                      "Entity": "dimlocation"
                     }
                   },
-                  "Property": "Date"
+                  "Property": "CountryName"
                 }
               },
-              "queryRef": "dimdate.Date",
-              "nativeQueryRef": "Date",
+              "queryRef": "dimlocation.CountryName",
+              "nativeQueryRef": "CountryName",
               "active": true
             }
           ]
@@ -46,24 +46,7 @@
                 }
               },
               "queryRef": "_Measures.cases_per_100K",
-              "nativeQueryRef": "cases_per_100K",
-              "displayName": "cases_per_100K"
-            }
-          ],
-          "fieldParameters": [
-            {
-              "parameterExpr": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Metric Selector"
-                    }
-                  },
-                  "Property": "Metric Selector"
-                }
-              },
-              "index": 0,
-              "length": 1
+              "nativeQueryRef": "cases_per_100K"
             }
           ]
         }
@@ -72,29 +55,64 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Measure": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "dimdate"
+                    "Entity": "_Measures"
                   }
                 },
-                "Property": "Date"
+                "Property": "cases_per_100K"
               }
             },
-            "direction": "Ascending"
+            "direction": "Descending"
           }
         ],
         "isDefaultSort": true
       }
     },
     "objects": {
-      "lineStyles": [
+      "valueAxis": [
         {
           "properties": {
-            "areaShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
                 }
               }
             }
@@ -108,19 +126,6 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "seriesLabels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
                 }
               }
             }
@@ -161,21 +166,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "f22564139ebe876d1093",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dimdate"
-              }
-            },
-            "Property": "Date"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "6c4e8ba9d98a7eedd644",
+        "name": "cdc1064d116a08c0e757",
         "field": {
           "Measure": {
             "Expression": {
@@ -187,6 +178,20 @@
           }
         },
         "type": "Advanced"
+      },
+      {
+        "name": "7d1523a6a0bce449d91f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dimlocation"
+              }
+            },
+            "Property": "CountryName"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

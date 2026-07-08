@@ -43,7 +43,7 @@ table 'Metric Selector'
 				    ("total_new_confirmed", NAMEOF('_Measures'[total_new_confirmed]), 0),
 				    ("case_fatality_rate", NAMEOF('_Measures'[case_fatality_rate]), 1),
 				    ("cases_per_100K", NAMEOF('_Measures'[cases_per_100K]), 2),
-				    ("vaccination_rate_pct", NAMEOF('_Measures'[vaccination_rate_pct]), 3)
+				    ("vaccination_rate_pct", NAMEOF('_Measures'[Vaccination Rate %]), 3)
 				}
 
 	annotation PBI_Id = 061843d4914e4570b913458da230c147

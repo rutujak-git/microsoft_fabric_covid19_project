@@ -4,10 +4,10 @@
   "position": {
     "x": 0,
     "y": 0,
-    "z": 1,
-    "height": 114.10852713178295,
-    "width": 724.34108527131787,
-    "tabOrder": 1
+    "z": 1000,
+    "height": 72.434108527131784,
+    "width": 1280,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "textbox",
@@ -23,7 +23,7 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontFamily": "Calibri",
-                      "fontSize": "44pt",
+                      "fontSize": "36pt",
                       "color": "#118dff"
                     }
                   }

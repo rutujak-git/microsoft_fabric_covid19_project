@@ -42,15 +42,24 @@ table _Measures
 		formatString: 0
 		lineageTag: a9b48997-6e51-4d38-a24d-bf76b5c16241
 
-	measure vaccination_rate_pct = ```
+	measure 'Vaccination Rate %' = ```
 			
-			                        VAR vax_rate = DIVIDE(
-			                                                SUM(factcoviddaily[CumulativeVaccinated]),
-			                                                SUM(dimlocation[Population])
-			                        )
-			                        RETURN IF(ISBLANK(vax_rate), "No Data", FORMAT(vax_rate,"0.0%"))
+			VAR VaxRate = 
+			    DIVIDE(
+			        SUMX(
+			            VALUES(dimlocation[LocationKey]),
+			            VAR CountryVaccinated = LASTNONBLANKVALUE(dimdate[Date], SUM(factcoviddaily[CumulativeVaccinated]))
+			            VAR CountryPopulation = CALCULATE(SUM(dimlocation[Population]))
+			            RETURN MIN(CountryVaccinated, CountryPopulation)
+			        ),
+			        SUM(dimlocation[Population])
+			    )
+			RETURN
+			    IF(ISBLANK(VaxRate), "No Data", FORMAT(VaxRate, "0.0%"))
 			```
 		lineageTag: 93ad5166-85e2-478e-bb48-dbf230da4ae7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure full_vaccination_rate_pct = ```
 			

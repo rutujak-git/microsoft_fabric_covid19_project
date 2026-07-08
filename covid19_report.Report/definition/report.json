@@ -9,6 +9,15 @@
         "page": "2.3.1"
       },
       "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "AccessibleDefault",
+      "reportVersionAtImport": {
+        "visual": "2.10.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
     }
   },
   "objects": {
@@ -24,13 +33,34 @@
           }
         }
       }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          }
+        }
+      }
     ]
   },
+  "publicCustomVisuals": [
+    "MultiCardKPIsC5A9F4E3B7D64A3F9E27B8D9C6A45F12"
+  ],
   "resourcePackages": [
     {
       "name": "SharedResources",
       "type": "SharedResources",
       "items": [
+        {
+          "name": "AccessibleDefault",
+          "path": "BuiltInThemes/AccessibleDefault.json",
+          "type": "CustomTheme"
+        },
         {
           "name": "CY26SU05",
           "path": "BaseThemes/CY26SU05.json",

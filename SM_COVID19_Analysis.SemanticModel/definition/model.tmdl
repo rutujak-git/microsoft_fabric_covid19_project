@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_QueryOrder = ["DirectLake - covid19_project_lakehouse"]
 
-annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","CalcGroup"]
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","CalcGroup","DaxQueryView_Desktop"]
 
 ref table factcoviddaily
 ref table dimlocation
