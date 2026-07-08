@@ -1,0 +1,182 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "052a0d1381ebdfd27181",
+  "position": {
+    "x": 0,
+    "y": 114.10852713178295,
+    "z": 0,
+    "height": 381.02325581395348,
+    "width": 698.54263565891472,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dimdate"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "dimdate.Date",
+              "nativeQueryRef": "Date",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "total_new_confirmed"
+                }
+              },
+              "queryRef": "_Measures.total_new_confirmed",
+              "nativeQueryRef": "total_new_confirmed",
+              "displayName": "total_new_confirmed"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "case_fatality_rate"
+                }
+              },
+              "queryRef": "_Measures.case_fatality_rate",
+              "nativeQueryRef": "case_fatality_rate",
+              "displayName": "case_fatality_rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "cases_per_100K"
+                }
+              },
+              "queryRef": "_Measures.cases_per_100K",
+              "nativeQueryRef": "cases_per_100K",
+              "displayName": "cases_per_100K"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metric Selector"
+                    }
+                  },
+                  "Property": "Metric Selector"
+                }
+              },
+              "index": 0,
+              "length": 3
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dimdate"
+                  }
+                },
+                "Property": "Date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7461680862f5e2c2a6f9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dimdate"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cbc93fa28e3de03484bc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "cases_per_100K"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a48ccf56a777bf8ed5bb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "total_new_confirmed"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d5b8439fe114d6d6f723",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "case_fatality_rate"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

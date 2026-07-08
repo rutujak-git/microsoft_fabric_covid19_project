@@ -1,0 +1,24 @@
+table DataSourceNote
+	lineageTag: 94ef2c6c-9c00-40a4-baee-f9a4718267ee
+
+	column Note
+		lineageTag: c60ee1eb-fcd4-486c-b0b4-98e26798cf1a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Note]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DataSourceNote = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Note", STRING,
+				    {
+				        {"Data sourced from Google COVID-19 Open Data. Historical, static dataset (updates stopped Sept 2022)."}
+				    }
+				)
+
+	annotation PBI_Id = fc9cf166de184b29a2ce1a0531003459
+

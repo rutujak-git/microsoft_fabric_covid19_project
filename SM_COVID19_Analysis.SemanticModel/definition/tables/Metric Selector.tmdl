@@ -1,0 +1,50 @@
+table 'Metric Selector'
+	lineageTag: ecddeb57-52e9-43a2-b971-a14fabf48c58
+
+	column 'Metric Selector'
+		lineageTag: 08d80b4f-6580-48cc-9e71-b635b184493c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Metric Selector Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Metric Selector Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Selector Fields'
+		isHidden
+		lineageTag: 544c047e-99a5-46e2-990f-1dffa2de5cdb
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Metric Selector Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Selector Order'
+		isHidden
+		formatString: 0
+		lineageTag: 9f6e549b-01c2-427b-8457-6a4aa7b86d7c
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Metric Selector' = calculated
+		mode: import
+		source =
+				{
+				    ("total_new_confirmed", NAMEOF('_Measures'[total_new_confirmed]), 0),
+				    ("case_fatality_rate", NAMEOF('_Measures'[case_fatality_rate]), 1),
+				    ("cases_per_100K", NAMEOF('_Measures'[cases_per_100K]), 2),
+				    ("vaccination_rate_pct", NAMEOF('_Measures'[vaccination_rate_pct]), 3)
+				}
+
+	annotation PBI_Id = 061843d4914e4570b913458da230c147
+
