@@ -1,0 +1,88 @@
+table _Measures
+	lineageTag: 00ec313b-5fd6-4b4b-8c87-6615cd96f37c
+
+	measure total_new_confirmed = SUM(factcoviddaily[NewConfirmed])
+		formatString: 0
+		lineageTag: 1e098a5b-fc6d-490e-8622-37cb2d1289ad
+
+	measure case_fatality_rate = ```
+			
+			                    DIVIDE(
+			                        SUM(factcoviddaily[NewDeceased]),
+			                        SUM(factcoviddaily[NewConfirmed])
+			                    )
+			```
+		lineageTag: 3d96deca-567e-4a2c-b8b6-9d5d345033a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure cases_per_100K =
+			DIVIDE(
+			                         SUM(factcoviddaily[NewConfirmed]),
+			                         SUM(dimlocation[Population])
+			) *100000
+		lineageTag: e585279e-1d5f-44c2-aeda-0efa609c28f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure total_new_confirmed_sumx = SUMX(factcoviddaily,factcoviddaily[NewConfirmed])
+		formatString: 0
+		lineageTag: 92dfe8fc-3575-4af7-ad70-e8b77861ddd4
+
+	measure 7day_avg_new_confirmed =
+			AVERAGEX(
+			                                DATESINPERIOD(dimdate[Date],MAX(dimdate[Date]),-7,DAY),
+			                                CALCULATE(SUM(factcoviddaily[NewConfirmed]))
+			)
+		lineageTag: 3611212e-aa14-484d-bb34-d144c6e6c0a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure latest_data_date = MAX(dimdate[DateKey])
+		formatString: 0
+		lineageTag: a9b48997-6e51-4d38-a24d-bf76b5c16241
+
+	measure 'Vaccination Rate %' = ```
+			
+			VAR VaxRate = 
+			    DIVIDE(
+			        SUMX(
+			            VALUES(dimlocation[LocationKey]),
+			            VAR CountryVaccinated = LASTNONBLANKVALUE(dimdate[Date], SUM(factcoviddaily[CumulativeVaccinated]))
+			            VAR CountryPopulation = CALCULATE(SUM(dimlocation[Population]))
+			            RETURN MIN(CountryVaccinated, CountryPopulation)
+			        ),
+			        SUM(dimlocation[Population])
+			    )
+			RETURN
+			    IF(ISBLANK(VaxRate), "No Data", FORMAT(VaxRate, "0.0%"))
+			```
+		lineageTag: 93ad5166-85e2-478e-bb48-dbf230da4ae7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure full_vaccination_rate_pct = ```
+			
+			            VAR fully_vax_rate = DIVIDE(
+			                                            SUM(factcoviddaily[NewFullyVaccinated]),
+			                                            SUM(dimlocation[Population])
+			                                            )
+			            return IF(ISBLANK(fully_vax_rate),"no data",FORMAT(fully_vax_rate,"0.0%"))
+			```
+		lineageTag: eee1b2f5-f5e9-4fef-9a5b-d227078528c9
+
+	column Value
+		formatString: 0
+		lineageTag: 2d74f7ef-15fe-446b-9e00-298b8982b7e7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = { BLANK() }
+
+	annotation PBI_Id = e0d9cb1d948e4d42880f9debcf2d87b2
+

@@ -1,0 +1,160 @@
+table factcoviddaily
+	lineageTag: 2708391b-d106-4fe7-8cfe-d9c60166001b
+	sourceLineageTag: [gold].[factcoviddaily]
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 32d5eef0-ffe6-4ad8-be9c-07a4ac98749a
+		sourceLineageTag: DateKey
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: string
+		lineageTag: 0be6e74d-3331-4229-941b-7876d9739533
+		sourceLineageTag: LocationKey
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewConfirmed
+		dataType: int64
+		formatString: 0
+		lineageTag: 9554ab08-37eb-49c6-bb48-5fbfccab957a
+		sourceLineageTag: NewConfirmed
+		summarizeBy: sum
+		sourceColumn: NewConfirmed
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewDeceased
+		dataType: int64
+		formatString: 0
+		lineageTag: 79e69557-4f04-4338-bbd7-0058436c47b1
+		sourceLineageTag: NewDeceased
+		summarizeBy: sum
+		sourceColumn: NewDeceased
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewTested
+		dataType: int64
+		formatString: 0
+		lineageTag: 0dbcfa54-2856-49f8-9f1e-b8059c7af3ca
+		sourceLineageTag: NewTested
+		summarizeBy: sum
+		sourceColumn: NewTested
+
+		annotation SummarizationSetBy = Automatic
+
+	column CumulativeConfirmed
+		dataType: int64
+		formatString: 0
+		lineageTag: adffe478-c2ac-47f4-83fd-b4d9266ca10a
+		sourceLineageTag: CumulativeConfirmed
+		summarizeBy: sum
+		sourceColumn: CumulativeConfirmed
+
+		annotation SummarizationSetBy = Automatic
+
+	column CumulativeDeceased
+		dataType: int64
+		formatString: 0
+		lineageTag: 213001a7-e58f-47b0-9adb-affa509a2c94
+		sourceLineageTag: CumulativeDeceased
+		summarizeBy: sum
+		sourceColumn: CumulativeDeceased
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewHospitalized
+		dataType: int64
+		formatString: 0
+		lineageTag: 1784f786-6834-4a62-9043-92328a4e11bc
+		sourceLineageTag: NewHospitalized
+		summarizeBy: sum
+		sourceColumn: NewHospitalized
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrentHospitalized
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e195dc7-6164-4484-b7bd-5ca48a9453d4
+		sourceLineageTag: CurrentHospitalized
+		summarizeBy: sum
+		sourceColumn: CurrentHospitalized
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewICU
+		dataType: int64
+		formatString: 0
+		lineageTag: f58a4df3-24a5-4a18-a54c-191dee98dcf1
+		sourceLineageTag: NewICU
+		summarizeBy: sum
+		sourceColumn: NewICU
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewVentilator
+		dataType: int64
+		formatString: 0
+		lineageTag: d39fead3-4fce-4275-9ea1-82854ca10c29
+		sourceLineageTag: NewVentilator
+		summarizeBy: sum
+		sourceColumn: NewVentilator
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewVaccinated
+		dataType: int64
+		formatString: 0
+		lineageTag: fe41678e-50ce-46a5-bb38-6f19623c58a2
+		sourceLineageTag: NewVaccinated
+		summarizeBy: sum
+		sourceColumn: NewVaccinated
+
+		annotation SummarizationSetBy = Automatic
+
+	column CumulativeVaccinated
+		dataType: int64
+		formatString: 0
+		lineageTag: dc9516e2-70dc-4eca-b417-8f209db6afe1
+		sourceLineageTag: CumulativeVaccinated
+		summarizeBy: sum
+		sourceColumn: CumulativeVaccinated
+
+		annotation SummarizationSetBy = Automatic
+
+	column NewFullyVaccinated
+		dataType: int64
+		formatString: 0
+		lineageTag: 8efa169b-d603-4949-9d9c-46353160eb68
+		sourceLineageTag: NewFullyVaccinated
+		summarizeBy: sum
+		sourceColumn: NewFullyVaccinated
+
+		annotation SummarizationSetBy = Automatic
+
+	column CumulativeFullyVaccinated
+		dataType: int64
+		formatString: 0
+		lineageTag: 41d292c2-4b79-4d0a-a008-5d5aa17002de
+		sourceLineageTag: CumulativeFullyVaccinated
+		summarizeBy: sum
+		sourceColumn: CumulativeFullyVaccinated
+
+		annotation SummarizationSetBy = Automatic
+
+	partition factcoviddaily = entity
+		mode: directLake
+		source
+			entityName: factcoviddaily
+			schemaName: gold
+			expressionSource: 'DirectLake - covid19_project_lakehouse'
+

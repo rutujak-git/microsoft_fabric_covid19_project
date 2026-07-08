@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DirectLake - covid19_project_lakehouse"]
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","CalcGroup","DaxQueryView_Desktop"]
+
+ref table factcoviddaily
+ref table dimlocation
+ref table dimdate
+ref table _Measures
+ref table 'Time Calculation'
+ref table 'Metric Selector'
+ref table DataSourceNote
+

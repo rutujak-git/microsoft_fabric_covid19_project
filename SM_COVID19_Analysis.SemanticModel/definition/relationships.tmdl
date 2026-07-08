@@ -1,0 +1,10 @@
+relationship 65e04c14-dad5-f426-16c6-57b343b97112
+	relyOnReferentialIntegrity
+	fromColumn: factcoviddaily.DateKey
+	toColumn: dimdate.DateKey
+
+relationship ead2d778-b835-c5fe-b766-9165809676e2
+	relyOnReferentialIntegrity
+	fromColumn: factcoviddaily.LocationKey
+	toColumn: dimlocation.LocationKey
+

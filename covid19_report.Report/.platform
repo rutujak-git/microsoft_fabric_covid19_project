@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "covid19_report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "84d989b4-bd35-8a98-4d8d-e695c8b89ab5"
+  }
+}

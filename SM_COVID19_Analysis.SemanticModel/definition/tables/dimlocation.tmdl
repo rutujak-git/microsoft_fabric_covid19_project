@@ -1,0 +1,99 @@
+table dimlocation
+	lineageTag: af272c6e-1f27-4e90-a2e9-74546a0542a2
+	sourceLineageTag: [gold].[dimlocation]
+
+	column LocationKey
+		dataType: string
+		lineageTag: b30fde94-dd10-4eb6-9727-4a4507ac31ee
+		sourceLineageTag: LocationKey
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryName
+		dataType: string
+		lineageTag: cb5f33f5-03c6-4e9b-a845-930287910951
+		sourceLineageTag: CountryName
+		summarizeBy: none
+		sourceColumn: CountryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryCode
+		dataType: string
+		lineageTag: baaff333-5db8-43f4-8a0e-75a3f5b3c3ab
+		sourceLineageTag: CountryCode
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryCodeISO3
+		dataType: string
+		lineageTag: f6caad71-9a61-46af-a29f-8064fce7ee25
+		sourceLineageTag: CountryCodeISO3
+		summarizeBy: none
+		sourceColumn: CountryCodeISO3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population
+		dataType: int64
+		formatString: 0
+		lineageTag: aad479b8-7d0b-4f47-8429-e4b9bd0ed11e
+		sourceLineageTag: Population
+		summarizeBy: none
+		sourceColumn: Population
+
+		annotation SummarizationSetBy = Automatic
+
+	column PopulationDensity
+		dataType: double
+		lineageTag: 00090fdd-184f-4a7d-99cb-f5ec48457054
+		sourceLineageTag: PopulationDensity
+		summarizeBy: none
+		sourceColumn: PopulationDensity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HDI
+		dataType: double
+		lineageTag: c273529f-3b01-4629-898a-ffd88c957242
+		sourceLineageTag: HDI
+		summarizeBy: none
+		sourceColumn: HDI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PopulationUrban
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b23d10b-de6e-411f-ab54-90f1c4c4cc2d
+		sourceLineageTag: PopulationUrban
+		summarizeBy: none
+		sourceColumn: PopulationUrban
+
+		annotation SummarizationSetBy = Automatic
+
+	column PopulationRural
+		dataType: int64
+		formatString: 0
+		lineageTag: 46278959-200e-4548-8899-324ee53a5ff3
+		sourceLineageTag: PopulationRural
+		summarizeBy: none
+		sourceColumn: PopulationRural
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimlocation = entity
+		mode: directLake
+		source
+			entityName: dimlocation
+			schemaName: gold
+			expressionSource: 'DirectLake - covid19_project_lakehouse'
+
